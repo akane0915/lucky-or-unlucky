@@ -6,6 +6,8 @@ $(function(){
 
   $("form").submit(function(e){
     e.preventDefault();
+    $("form").hide();
+    $("#reset").show();
 
     $("input:checkbox[name=bad-luck]:checked").each(function(){
       badLuckCount  ++;
@@ -14,7 +16,19 @@ $(function(){
     $("input:checkbox[name=good-luck]:checked").each(function(){
       goodLuckCount  ++;
     });
-    console.log("you have this much " + badLuckCount + " bad luck");
-    console.log("you have this much " + goodLuckCount + " good luck");
+
+    if (badLuckCount > goodLuckCount){
+      $(".unlucky").show();
+    } else if (badLuckCount < goodLuckCount){
+      $(".lucky").show();
+    } else {
+      $(".even").show();
+    }
   }) //form function close
+
+  //Reset Button
+  $("#reset").click(function(){
+    location.reload();
+  });
+
 }); //document ready close
